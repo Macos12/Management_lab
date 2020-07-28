@@ -1,0 +1,698 @@
+﻿@model IEnumerable<ML.Models.Pclab>
+@using Microsoft.AspNet.Identity;
+@using ML.Extensions;
+@using Microsoft.AspNet.Identity;
+@using Microsoft.AspNet.Identity.Owin;
+
+
+@{ Layout = null;}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no" name="viewport">
+    <title>Lab</title>
+    <link rel="stylesheet" href="~/Content/dist/modules/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/Content/dist/modules/ionicons/css/ionicons.min.css">
+    <link rel="stylesheet" href="~/Content/dist/modules/fontawesome/web-fonts-with-css/css/fontawesome-all.min.css">
+    <link rel="stylesheet" href="~/Content/dist/modules/summernote/summernote-lite.css">
+    <link rel="stylesheet" href="~/Content/dist/modules/flag-icon-css/css/flag-icon.min.css">
+    <link rel="stylesheet" href="~/Content/dist/css/demo.css">
+    <link rel="stylesheet" href="~/Content/dist/css/style.css">
+    <link rel="stylesheet" href="~/Content/dist/modules/toastr/build/toastr.min.css">
+</head>
+<body>
+
+    <div id="app">
+        <div class="main-wrapper">
+            <div class="navbar-bg"></div>
+            <nav class="navbar navbar-expand-lg main-navbar">
+                <form class="form-inline mr-auto">
+                    <ul class="navbar-nav mr-3">
+                        <li><a href="#" data-toggle="sidebar" class="nav-link nav-link-lg"><i class="ion ion-navicon-round"></i></a></li>
+
+                    </ul>
+
+
+                    <div class="search-element">
+                        <a href="@Url.Action("Index", "Home")" class="nav-link nav-link-lg">
+                            <i class="ion ion-android-person d-lg-none"></i>
+                            <div class="d-sm-none d-lg-inline-block">Home</div>
+                        </a>
+
+                    </div>
+                    <div class="search-element">
+                        <a href="@Url.Action("Index", "lab")" class="nav-link nav-link-lg">
+                            <i class="ion ion-android-person d-lg-none"></i>
+                            <div class="d-sm-none d-lg-inline-block">Lab</div>
+                        </a>
+
+                    </div>
+                    <div class="search-element">
+                        <a href="@Url.Action("Index", "problem")" class="nav-link nav-link-lg">
+                            <i class="ion ion-android-person d-lg-none"></i>
+                            <div class="d-sm-none d-lg-inline-block">Pc Problems</div>
+                        </a>
+
+                    </div>
+                </form>
+                @Html.Partial("_LoginPartial")
+            </nav>
+            <!--left side bar-->
+            @if (User.IsInRole("Admin"))
+            {
+                <div class="main-sidebar">
+                    <aside id="sidebar-wrapper">
+                        <div class="sidebar-brand">
+                            <a href="@Url.Action("Index", "Home")">Management</a>
+                        </div>
+
+                        <div class="sidebar-user">
+                            <div class="sidebar-user-details text-center">
+                                <div class="user-name">@User.Identity.Getusern()</div>
+                                <div class="user-role">
+                                    @ViewBag.currentrole
+                                </div>
+                            </div>
+                        </div>
+                        <ul class="sidebar-menu">
+                            <li class="menu-header">Dashboard</li>
+                            <li>
+                                <a href="@Url.Action("In", "lab")"><i class="ion ion-speedometer"></i><span>Dashboard</span></a>
+                            </li>
+                            <li class="menu-header">Pc Parts</li>
+                            <li>
+                                <a href="#" class="has-dropdown"><i class="ion ion-ios-albums-outline"></i><span>Pc Parts Primary</span></a>
+                                <ul class="menu-dropdown">
+                                    <li>
+                                        <a href="#" class="has-dropdown"><i class="ion ion-ios-circle-outline"></i> Pc cases</a>
+                                        <ul class="menu-dropdown">
+                                            <li><a href="@Url.Action("Create", "pc_case")"><i class="ion ion-ios-circle-outline"></i> Add a Pc case</a></li>
+                                            <li><a href="@Url.Action("Index", "pc_case")"><i class="ion ion-ios-circle-outline"></i> Modify a Pc case</a></li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="has-dropdown"><i class="ion ion-ios-circle-outline"></i> Power Supply</a>
+                                        <ul class="menu-dropdown">
+                                            <li><a href="@Url.Action("Create", "psu")"><i class="ion ion-ios-circle-outline"></i> Add a Power Supply</a></li>
+                                            <li><a href="@Url.Action("Index", "psu")"><i class="ion ion-ios-circle-outline"></i> Modify a Power Supply</a></li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="has-dropdown"><i class="ion ion-ios-circle-outline"></i> Motherboard</a>
+                                        <ul class="menu-dropdown">
+                                            <li><a href="@Url.Action("Create", "motherboard")"><i class="ion ion-ios-circle-outline"></i> Add a Motherboard</a></li>
+                                            <li><a href="@Url.Action("Index", "motherboard")"><i class="ion ion-ios-circle-outline"></i> Modify a Motherboard</a></li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="has-dropdown"><i class="ion ion-ios-circle-outline"></i> Processor</a>
+                                        <ul class="menu-dropdown">
+                                            <li><a href="@Url.Action("Create", "processor")"><i class="ion ion-ios-circle-outline"></i> Add a Processor</a></li>
+                                            <li><a href="@Url.Action("Index", "processor")"><i class="ion ion-ios-circle-outline"></i> Modify a Processor</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="#" class="has-dropdown"><i class="ion ion-ios-albums-outline"></i><span>Pc Parts Secondary</span></a>
+                                <ul class="menu-dropdown">
+                                    <li>
+                                        <a href="#" class="has-dropdown"><i class="ion ion-ios-circle-outline"></i> Graphical Card</a>
+                                        <ul class="menu-dropdown">
+                                            <li><a href="@Url.Action("Create", "gpu")"><i class="ion ion-ios-circle-outline"></i> Add a Graphical Card</a></li>
+                                            <li><a href="@Url.Action("Index", "gpu")"><i class="ion ion-ios-circle-outline"></i> Modify a Graphical Card</a></li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="has-dropdown"><i class="ion ion-ios-circle-outline"></i> Hard disk</a>
+                                        <ul class="menu-dropdown">
+                                            <li><a href="@Url.Action("Create", "hard_disk")"><i class="ion ion-ios-circle-outline"></i> Add a Hard disk</a></li>
+                                            <li><a href="@Url.Action("Index", "hard_disk")"><i class="ion ion-ios-circle-outline"></i> Modify a hard disk</a></li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="has-dropdown"><i class="ion ion-ios-circle-outline"></i> Optical</a>
+                                        <ul class="menu-dropdown">
+                                            <li><a href="@Url.Action("Create", "optical")"><i class="ion ion-ios-circle-outline"></i> Add a Optical</a></li>
+                                            <li><a href="@Url.Action("Index", "optical")"><i class="ion ion-ios-circle-outline"></i> Modify an Optical</a></li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="has-dropdown"><i class="ion ion-ios-circle-outline"></i> Ram</a>
+                                        <ul class="menu-dropdown">
+                                            <li><a href="@Url.Action("Create", "rams")"><i class="ion ion-ios-circle-outline"></i> Add a Ram</a></li>
+                                            <li><a href="@Url.Action("Index", "rams")"><i class="ion ion-ios-circle-outline"></i> Modify a Ram</a></li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="has-dropdown"><i class="ion ion-ios-circle-outline"></i> Cooler</a>
+                                        <ul class="menu-dropdown">
+                                            <li><a href="@Url.Action("Create", "coolers")"><i class="ion ion-ios-circle-outline"></i> Add a Cooler</a></li>
+                                            <li><a href="@Url.Action("Index", "coolers")"><i class="ion ion-ios-circle-outline"></i> Modify a Cooler</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("Create", "lab")"><i class="ion ion-plus-round"></i><span>Create a new Lab Pc</span></a>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("Create", "Home")"><i class="ion ion-document-text"></i><span>Create a new Post</span></a>
+                            </li>
+                            <li class="menu-header">Manage Users</li>
+                            <li>
+                                <a href="@Url.Action("Index", "Roles")"><i class="ion ion-person"></i><span>Users and Roles</span></a>
+                            </li>
+                            <li class="menu-header">Refer a Pc Problem</li>
+                            <li>
+                                <a href="@Url.Action("Create", "problem")"><i class="ion ion-document-text"></i><span>Create</span></a>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("Index", "problem")"><i class="ion ion-wrench"></i><span>Manage</span></a>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("Index", "Cascade")"><i class="ion ion-information"></i><span>Usefull Information</span></a>
+                            </li>
+                        </ul>
+                    </aside>
+                </div>
+            }
+            else if (User.IsInRole("User"))
+            {
+                <div class="main-sidebar">
+                    <aside id="sidebar-wrapper">
+                        <div class="sidebar-brand">
+                            <a href="@Url.Action("Index", "Home")">Management</a>
+                        </div>
+
+                        <div class="sidebar-user">
+                            <div class="sidebar-user-details text-center">
+                                <div class="user-name">@User.Identity.Getusern()</div>
+                                <div class="user-role">
+                                    @ViewBag.currentrole
+                                </div>
+                            </div>
+                        </div>
+                        <ul class="sidebar-menu">
+                            <li class="menu-header">Refer a Pc Problem</li>
+                            <li class="active">
+                                <a href="@Url.Action("Create", "problem")"><i class="ion ion-document-text"></i><span>Create</span></a>
+                            </li>
+
+                        </ul>
+                    </aside>
+                </div>
+            }
+            else
+            {
+                <div class="main-sidebar">
+                    <aside id="sidebar-wrapper">
+                        <div class="sidebar-brand">
+                            <a href="@Url.Action("Index", "Home")">Management</a>
+                        </div>
+
+                        <div class="sidebar-user">
+                            <div class="sidebar-user-details text-center">
+                                <div class="user-name">Welcome to the Management</div>
+                                <div class="user-role">
+                                    Laboratory
+                                </div>
+                            </div>
+                        </div>
+                        <ul class="sidebar-menu">
+                            <li class="menu-header">Don't have an Account?</li>
+                            <li>
+                                <a href="@Url.Action("Register", "Account")"><i class="ion ion-plus-round"></i><span>Create one</span></a>
+                            </li>
+                            <li class="menu-header">Log in now</li>
+                            <li>
+                                <a href="@Url.Action("Login", "Account")"><i class="ion ion-log-in"></i><span>Sign in</span></a>
+                            </li>
+                        </ul>
+                    </aside>
+                </div>
+            }
+            @{ var a = "..."; var caselbl= "Case"; var motherlbl = "Motherboard"; var psulbl = "Power Supply";
+                var cpulbl = "Processor"; var ramlbl = "Ram"; var hddlbl = "Hard Disk"; var gpulbl = "Graphical card"; var coolerlbl = "Cooler";
+                var opticallbl = "Optical";}
+            <!--Total admin Total Users-->
+            <div class="main-content">
+                <section class="section">
+                    @if (Model.Count() > 0)
+                    {
+                        foreach (var item in Model)
+                        {
+                            <h1 class="section-header">
+                                <div> Name of Pc: @item.NamePc /Lab Room: @item.lab.lab_name</div>
+                                @if (User.IsInRole("Admin"))
+                                {
+                                <div class="float-right">
+                                    <a href="@Url.Action("Edit", "lab", new { id = item.GID })"
+                                       class="btn btn-secondary btn-sm text-right">
+                                        <i class="glyphicon glyphicon-edit"></i>&nbsp;Edit
+                                    </a>  <a href="@Url.Action("DeletePc", "lab", new { GID = item.GID })" onclick = "return confirm('Are you sure that you want to delete this pc build?');"
+                                             class="btn btn-danger btn-sm text-right">
+                                        <i class="glyphicon glyphicon-trash"></i>&nbsp;Delete this Pc
+                                    </a>
+                                </div>
+                                }
+                            </h1>
+
+                            <div class="row">
+                                <div class="col-lg-3 col-md-12 col-12 col-sm-12">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <p style="text-align:center;">
+                                                @if (item.pc_case != null)
+                                                {
+                                                    <a href="@Url.Action("Details", "pc_case", new { id = item.pc_case.GID })">
+                                                        <img src="@item.pc_case.Image" width="200" height="150" alt="@item.pc_case.Name" />
+                                                    </a>
+                                                }
+                                                else
+                                                {
+                                                    <img src="~/Images/Author-2.png" width="200" height="150" />
+                                                }
+                                            </p>
+                                        </div>
+                                        <div class="card-body">
+                                            @if (item.pc_case != null)
+                                            {
+                                                if (item.pc_case.Name.Length >= 31)
+                                                {
+                                                    @caselbl<br />
+                                                    @item.pc_case.Name.Substring(0, 28)@a;
+                                                }
+                                                else
+                                                {
+                                                    @caselbl<br />
+                                                    @item.pc_case.Name
+                                                }
+                                            }
+                                            else
+                                            {
+                                                @caselbl<br />
+                                                <div>Will be setted from the Admin</div>
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-12 col-12 col-sm-12">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <p style="text-align:center;">
+                                                @if (item.motherboard != null)
+                                                {
+                                                    <a href="@Url.Action("Details", "motherboard", new { id = item.motherboard.GID })">
+                                                        <img src="@item.motherboard.Image" width="200" height="150" alt="@item.motherboard.Name" />
+                                                    </a>
+                                                }
+                                                else
+                                                {
+                                                    <img src="~/Images/Author-2.png" width="200" height="150" />
+                                                }
+                                            </p>
+                                        </div>
+                                        <div class="card-body">
+                                            @if (item.motherboard != null)
+                                            {
+                                                if (item.motherboard.Name.Length >= 31)
+                                                {
+                                                    @motherlbl<br />
+                                                    @item.motherboard.Name.Substring(0, 28)@a;
+                                                }
+                                                else
+                                                {
+                                                    @motherlbl<br />
+                                                    @item.motherboard.Name
+                                                }
+                                            }
+                                            else
+                                            {
+                                                @motherlbl<br />
+                                                <div>Will be setted from the Admin</div>
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-12 col-12 col-sm-12">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <p style="text-align:center;">
+                                                @if (item.psu != null)
+                                                {
+                                                    <a href="@Url.Action("Details", "psu", new { id = item.psu.GID })">
+                                                        <img src="@item.psu.Image" width="200" height="150" alt="@item.psu.Name" />
+                                                    </a>
+                                                }
+                                                else
+                                                {
+                                                    <img src="~/Images/Author-2.png" width="200" height="150" />
+                                                }
+                                            </p>
+                                        </div>
+                                        <div class="card-body">
+                                            @if (item.psu != null)
+                                            {
+                                                if (item.psu.Name.Length >= 31)
+                                                {
+                                                    @psulbl<br />
+                                                    @item.psu.Name.Substring(0, 28)@a;
+                                                }
+                                                else
+                                                {
+                                                    @psulbl<br />
+                                                    @item.psu.Name
+                                                }
+                                            }
+                                            else
+                                            {
+                                                @psulbl<br />
+                                                <div>Will be setted from the Admin</div>
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-12 col-12 col-sm-12">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <p style="text-align:center;">
+                                                @if (item.processor!=null)
+                                                {
+                                                    <a href="@Url.Action("Details", "processor", new { id = item.processor.GID })">
+                                                        <img src="@item.processor.Image" width="200" height="150" alt="@item.processor.Name" />
+                                                    </a>
+                                                }
+                                                else
+                                                {
+                                                    <img src="~/Images/Author-2.png" width="200" height="150" />
+                                                }
+                                            </p>
+                                        </div>
+                                        <div class="card-body">
+                                            @if (item.processor != null)
+                                            {
+                                                if (item.processor.Name.Length >= 31)
+                                                {
+                                                    @cpulbl<br />
+                                                    @item.processor.Name.Substring(0, 28)@a;
+                                                }
+                                                else
+                                                {
+                                                    @cpulbl<br />
+                                                    @item.processor.Name
+                                                }
+                                            }
+                                            else
+                                            {
+                                                @cpulbl<br />
+                                                <div>Will be setted from the Admin</div>
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-3 col-md-12 col-12 col-sm-12">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <p style="text-align:center;">
+                                                @if (item.ram != null)
+                                                {
+                                                    <a href="@Url.Action("Details", "rams", new { id = item.ram.GID })">
+                                                        <img src="@item.ram.Image" width="200" height="150" alt="@item.ram.Name" />
+                                                    </a>
+                                                }
+                                                else
+                                                {
+                                                    <img src="~/Images/Author-2.png" width="200" height="150" />
+                                                }
+                                            </p>
+                                        </div>
+                                        <div class="card-body">
+                                            @if (item.ram != null)
+                                            {
+                                                if (item.ram.Name.Length >= 31)
+                                                {
+                                                    @ramlbl<br />
+                                                    @item.ram.Name.Substring(0, 28)@a;
+                                                }
+                                                else
+                                                {
+                                                    @ramlbl<br />
+                                                    @item.ram.Name
+                                                }
+                                            }
+                                            else
+                                            {
+                                                @ramlbl<br />
+                                                <div>Will be setted from the Admin</div>
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-12 col-12 col-sm-12">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <p style="text-align:center;">
+                                                @if (item.hard_disk != null)
+                                                {
+                                                    <a href="@Url.Action("Details", "hard_disk", new { id = item.hard_disk.GID })">
+                                                        <img src="@item.hard_disk.Image" width="200" height="150" alt="@item.hard_disk.Name" />
+                                                    </a>
+                                                }
+                                                else
+                                                {
+                                                    <img src="~/Images/Author-2.png" width="200" height="150" />
+                                                }
+                                            </p>
+                                        </div>
+                                        <div class="card-body">
+                                            @if (item.hard_disk != null)
+                                            {
+                                                if (item.hard_disk.Name.Length >= 31)
+                                                {
+                                                    @hddlbl<br />
+                                                    @item.hard_disk.Name.Substring(0, 28)@a;
+                                                }
+                                                else
+                                                {
+                                                    @hddlbl<br />
+                                                    @item.hard_disk.Name
+                                                }
+                                            }
+                                            else
+                                            {
+                                                @hddlbl<br />
+                                                <div>Will be setted from the Admin</div>
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-12 col-12 col-sm-12">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <p style="text-align:center;">
+                                                @if (item.gpu != null)
+                                                {
+                                                    <a href="@Url.Action("Details", "gpu", new { id = item.gpu.GID })">
+                                                        <img src="@item.gpu.Image" width="200" height="150" alt="@item.gpu.Name" />
+                                                    </a>
+                                                }
+                                                else
+                                                {
+                                                    <img src="~/Images/Author-2.png" width="200" height="150" />
+                                                }
+                                            </p>
+                                        </div>
+                                        <div class="card-body">
+                                            @if (item.gpu != null)
+                                            {
+                                                if (item.gpu.Name.Length >= 31)
+                                                {
+                                                    @gpulbl<br />
+                                                    @item.gpu.Name.Substring(0, 28)@a;
+                                                }
+                                                else
+                                                {
+                                                    @gpulbl<br />
+                                                    @item.gpu.Name
+                                                }
+                                            }
+                                            else
+                                            {
+                                                @gpulbl<br />
+                                                <div>Will be setted from the Admin</div>
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                                @if (item.coolerID != null)
+                                {
+                                    <div class="col-lg-3 col-md-12 col-12 col-sm-12">
+                                        <div class="card">
+                                            <div class="card-header">
+                                                <p style="text-align:center;">
+                                                    @if (item.cooler != null)
+                                                    {
+                                                        <a href="@Url.Action("Details", "coolers", new { id = item.cooler.GID })">
+                                                            <img src="@item.cooler.Image" width="200" height="150" alt="@item.cooler.Name" />
+                                                        </a>
+                                                    }
+                                                    else
+                                                    {
+                                                        <img src="~/Images/Author-2.png" width="200" height="150" />
+                                                    }
+                                                </p>
+                                            </div>
+                                            <div class="card-body">
+                                                @if (item.cooler != null)
+                                                {
+                                                    if (item.cooler.Name.Length >= 31)
+                                                    {
+                                                        @coolerlbl<br />
+                                                        @item.cooler.Name.Substring(0, 28)@a;
+                                                    }
+                                                    else
+                                                    {
+                                                        @coolerlbl<br />
+                                                        @item.cooler.Name
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    @coolerlbl<br />
+                                                    <div>Will be setted from the Admin</div>
+                                                }
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                                else if (item.coolerID == null)
+                                {
+                                    if (item.opticalID != null)
+                                    {
+                                        <div class="col-lg-3 col-md-12 col-12 col-sm-12">
+                                            <div class="card">
+                                                <div class="card-header">
+                                                    <p style="text-align:center;">
+                                                        @if (item.optical != null)
+                                                        {
+                                                            <a href="@Url.Action("Details", "optical", new { id = item.optical.GID })">
+                                                                <img src="@item.optical.Image" width="200" height="150" alt="@item.optical.Name" />
+                                                            </a>
+                                                        }
+                                                        else
+                                                        {
+                                                            <img src="~/Images/Author-2.png" width="200" height="150" />
+                                                        }
+                                                    </p>
+                                                </div>
+                                                <div class="card-body">
+                                                    @if (item.optical != null)
+                                                    {
+                                                        if (item.optical.Name.Length >= 31)
+                                                        {
+                                                            @opticallbl<br />
+                                                            @item.optical.Name.Substring(0, 28)@a;
+                                                        }
+                                                        else
+                                                        {
+                                                            @opticallbl<br />
+                                                            @item.optical.Name
+                                                        }
+                                                    }
+                                                    else
+                                                    {
+                                                        @opticallbl<br />
+                                                        <div>Will be setted from the Admin</div>
+                                                    }
+                                                </div>
+                                            </div>
+                                        </div>
+                                    }
+                                }
+
+                            </div>
+
+                            if (item.coolerID != null && item.optical != null)
+                            {
+                                <div class="row">
+                                    <div class="col-lg-3 col-md-12 col-12 col-sm-12">
+                                        <div class="card">
+                                            <div class="card-header">
+                                                <p style="text-align:center;">
+                                                    @if (item.optical != null)
+                                                    {
+                                                        <a href="@Url.Action("Details", "optical", new { id = item.optical.GID })">
+                                                            <img src="@item.optical.Image" width="200" height="150" alt="@item.optical.Name" />
+                                                        </a>
+                                                    }
+                                                    else
+                                                    {
+                                                        <img src="~/Images/Author-2.png" width="200" height="150" />
+                                                    }
+                                                </p>
+                                            </div>
+                                            <div class="card-body">
+                                                @if (item.optical != null)
+                                                {
+                                                    if (item.optical.Name.Length >= 31)
+                                                    {
+                                                        @opticallbl<br />
+                                                        @item.optical.Name.Substring(0, 28)@a;
+                                                    }
+                                                    else
+                                                    {
+                                                        @opticallbl<br />
+                                                        @item.optical.Name
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    @opticallbl<br />
+                                                    <div>Will be setted from the Admin</div>
+                                                }
+                                            </div>
+                                        </div>
+                                    </div></div>
+
+                                    }
+                                <hr />
+                            }
+                        }
+                            else
+                            {
+                                <div style = "color:red; font-weight: bold"> No Pc builds Found </div >
+                            }
+
+
+                        </section >
+                    </div >
+                    <footer class="main-footer">
+                        <div class="footer-left">
+                            &copy; Copyright @DateTime.Now.Year
+                        </div>
+                <div class="footer-right"></div>
+            </footer>
+        </div>
+    </div>
+
+    <script src="~/Content/dist/modules/jquery.min.js"></script>
+    <script src="~/Content/dist/modules/popper.js"></script>
+    <script src="~/Content/dist/modules/tooltip.js"></script>
+    <script src="~/Content/dist/modules/bootstrap/js/bootstrap.min.js"></script>
+    <script src="~/Content/dist/modules/nicescroll/jquery.nicescroll.min.js"></script>
+    <script src="~/Content/dist/modules/scroll-up-bar/dist/scroll-up-bar.min.js"></script>
+    <script src="~/Content/dist/js/sa-functions.js"></script>
+    <script src="~/Content/dist/modules/chart.min.js"></script>
+    <script src="~/Content/dist/modules/summernote/summernote-lite.js"></script>
+
+    <script src="~/Content/dist/modules/toastr/build/toastr.min.js"></script>
+    <script src="~/Content/dist/js/scripts.js"></script>
+    <script src="~/Content/dist/js/custom.js"></script>
+</body>
+</html>
+

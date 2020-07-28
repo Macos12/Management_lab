@@ -1,0 +1,182 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="db_managment_labModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="announcement">
+    <Key>
+      <PropertyRef Name="GID" />
+    </Key>
+    <Property Name="GID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Title" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="body_text" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="username" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="date" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CategoryCoolers">
+    <Key>
+      <PropertyRef Name="cat_cooler_id" />
+    </Key>
+    <Property Name="cat_cooler_id" Type="int" Nullable="false" />
+    <Property Name="cat_cooler_name" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="CategoryHardDisk">
+    <Key>
+      <PropertyRef Name="cat_hard_disk_id" />
+    </Key>
+    <Property Name="cat_hard_disk_id" Type="int" Nullable="false" />
+    <Property Name="cat_hard_disk_name" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="CategoryProblems">
+    <Key>
+      <PropertyRef Name="cat_problem_id" />
+    </Key>
+    <Property Name="cat_problem_id" Type="int" Nullable="false" />
+    <Property Name="cat_problem_name" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="cooler">
+    <Key>
+      <PropertyRef Name="GID" />
+    </Key>
+    <Property Name="GID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="255" />
+    <Property Name="Specs" Type="nvarchar" MaxLength="255" />
+    <Property Name="Image" Type="nvarchar" MaxLength="255" />
+    <Property Name="Manufacture" Type="nvarchar" MaxLength="255" />
+    <Property Name="cat_cooler_id" Type="int" />
+  </EntityType>
+  <EntityType Name="gpu">
+    <Key>
+      <PropertyRef Name="GID" />
+    </Key>
+    <Property Name="GID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="255" />
+    <Property Name="Specs" Type="nvarchar" MaxLength="255" />
+    <Property Name="Image" Type="nvarchar" MaxLength="255" />
+    <Property Name="Manufacture" Type="nvarchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="hard_disk">
+    <Key>
+      <PropertyRef Name="GID" />
+    </Key>
+    <Property Name="GID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="255" />
+    <Property Name="Specs" Type="nvarchar" MaxLength="255" />
+    <Property Name="Image" Type="nvarchar" MaxLength="255" />
+    <Property Name="Manufacture" Type="nvarchar" MaxLength="255" />
+    <Property Name="cat_hard_disk_id" Type="int" />
+  </EntityType>
+  <EntityType Name="labs">
+    <Key>
+      <PropertyRef Name="lab_id" />
+    </Key>
+    <Property Name="lab_id" Type="int" Nullable="false" />
+    <Property Name="lab_name" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="motherboard">
+    <Key>
+      <PropertyRef Name="GID" />
+    </Key>
+    <Property Name="GID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="255" />
+    <Property Name="Specs" Type="nvarchar" MaxLength="255" />
+    <Property Name="Image" Type="nvarchar" MaxLength="255" />
+    <Property Name="Manufacture" Type="nvarchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="optical">
+    <Key>
+      <PropertyRef Name="GID" />
+    </Key>
+    <Property Name="GID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="255" />
+    <Property Name="Specs" Type="nvarchar" MaxLength="255" />
+    <Property Name="Image" Type="nvarchar" MaxLength="255" />
+    <Property Name="Manufacture" Type="nvarchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="pc_case">
+    <Key>
+      <PropertyRef Name="GID" />
+    </Key>
+    <Property Name="GID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="255" />
+    <Property Name="Specs" Type="nvarchar" MaxLength="255" />
+    <Property Name="Image" Type="nvarchar" MaxLength="255" />
+    <Property Name="Manufacture" Type="nvarchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="Pclab">
+    <Key>
+      <PropertyRef Name="GID" />
+    </Key>
+    <Property Name="GID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="NamePc" Type="nvarchar" MaxLength="255" />
+    <Property Name="motherboardID" Type="uniqueidentifier" />
+    <Property Name="ramID" Type="uniqueidentifier" />
+    <Property Name="cpuID" Type="uniqueidentifier" />
+    <Property Name="hard_diskID" Type="uniqueidentifier" />
+    <Property Name="psuID" Type="uniqueidentifier" />
+    <Property Name="gpuID" Type="uniqueidentifier" />
+    <Property Name="caseID" Type="uniqueidentifier" />
+    <Property Name="opticalID" Type="uniqueidentifier" />
+    <Property Name="coolerID" Type="uniqueidentifier" />
+    <Property Name="lab_id" Type="int" />
+  </EntityType>
+  <EntityType Name="PcProblem">
+    <Key>
+      <PropertyRef Name="GID" />
+    </Key>
+    <Property Name="GID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="NamePc" Type="uniqueidentifier" />
+    <Property Name="cat_problem_id" Type="int" />
+    <Property Name="MoreDetails" Type="nvarchar(max)" />
+    <Property Name="username" Type="nvarchar" MaxLength="255" />
+    <Property Name="date" Type="datetime" />
+    <Property Name="IsSolved" Type="bit" />
+    <Property Name="lab_id" Type="int" />
+    <Property Name="itemGID" Type="uniqueidentifier" />
+  </EntityType>
+  <EntityType Name="processor">
+    <Key>
+      <PropertyRef Name="GID" />
+    </Key>
+    <Property Name="GID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="255" />
+    <Property Name="Specs" Type="nvarchar" MaxLength="255" />
+    <Property Name="Image" Type="nvarchar" MaxLength="255" />
+    <Property Name="Manufacture" Type="nvarchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="psu">
+    <Key>
+      <PropertyRef Name="GID" />
+    </Key>
+    <Property Name="GID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="255" />
+    <Property Name="Specs" Type="nvarchar" MaxLength="255" />
+    <Property Name="Image" Type="nvarchar" MaxLength="255" />
+    <Property Name="Manufacture" Type="nvarchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="ram">
+    <Key>
+      <PropertyRef Name="GID" />
+    </Key>
+    <Property Name="GID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="255" />
+    <Property Name="Specs" Type="nvarchar" MaxLength="255" />
+    <Property Name="Image" Type="nvarchar" MaxLength="255" />
+    <Property Name="Manufacture" Type="nvarchar" MaxLength="255" />
+  </EntityType>
+  <EntityContainer Name="db_managment_labModelStoreContainer">
+    <EntitySet Name="announcement" EntityType="Self.announcement" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CategoryCoolers" EntityType="Self.CategoryCoolers" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CategoryHardDisk" EntityType="Self.CategoryHardDisk" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CategoryProblems" EntityType="Self.CategoryProblems" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="cooler" EntityType="Self.cooler" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="gpu" EntityType="Self.gpu" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="hard_disk" EntityType="Self.hard_disk" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="labs" EntityType="Self.labs" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="motherboard" EntityType="Self.motherboard" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="optical" EntityType="Self.optical" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="pc_case" EntityType="Self.pc_case" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Pclab" EntityType="Self.Pclab" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PcProblem" EntityType="Self.PcProblem" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="processor" EntityType="Self.processor" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="psu" EntityType="Self.psu" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ram" EntityType="Self.ram" Schema="dbo" store:Type="Tables" />
+  </EntityContainer>
+</Schema>

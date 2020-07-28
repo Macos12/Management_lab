@@ -1,0 +1,150 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="db_managment_labModelStoreContainer" CdmEntityContainer="db_managment_labEntities2">
+    <EntitySetMapping Name="CategoryCoolers">
+      <EntityTypeMapping TypeName="db_managment_labModel.CategoryCooler">
+        <MappingFragment StoreEntitySet="CategoryCoolers">
+          <ScalarProperty Name="cat_cooler_id" ColumnName="cat_cooler_id" />
+          <ScalarProperty Name="cat_cooler_name" ColumnName="cat_cooler_name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="coolers">
+      <EntityTypeMapping TypeName="db_managment_labModel.cooler">
+        <MappingFragment StoreEntitySet="cooler">
+          <ScalarProperty Name="cat_cooler_id" ColumnName="cat_cooler_id" />
+          <ScalarProperty Name="GID" ColumnName="GID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Specs" ColumnName="Specs" />
+          <ScalarProperty Name="Image" ColumnName="Image" />
+          <ScalarProperty Name="Manufacture" ColumnName="Manufacture" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="announcements">
+      <EntityTypeMapping TypeName="db_managment_labModel.announcement">
+        <MappingFragment StoreEntitySet="announcement">
+          <ScalarProperty Name="date" ColumnName="date" />
+          <ScalarProperty Name="username" ColumnName="username" />
+          <ScalarProperty Name="body_text" ColumnName="body_text" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="GID" ColumnName="GID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CategoryHardDisks">
+      <EntityTypeMapping TypeName="db_managment_labModel.CategoryHardDisk">
+        <MappingFragment StoreEntitySet="CategoryHardDisk">
+          <ScalarProperty Name="cat_hard_disk_name" ColumnName="cat_hard_disk_name" />
+          <ScalarProperty Name="cat_hard_disk_id" ColumnName="cat_hard_disk_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="gpus">
+      <EntityTypeMapping TypeName="db_managment_labModel.gpu">
+        <MappingFragment StoreEntitySet="gpu">
+          <ScalarProperty Name="Manufacture" ColumnName="Manufacture" />
+          <ScalarProperty Name="Image" ColumnName="Image" />
+          <ScalarProperty Name="Specs" ColumnName="Specs" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="GID" ColumnName="GID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="hard_disk">
+      <EntityTypeMapping TypeName="db_managment_labModel.hard_disk">
+        <MappingFragment StoreEntitySet="hard_disk">
+          <ScalarProperty Name="cat_hard_disk_id" ColumnName="cat_hard_disk_id" />
+          <ScalarProperty Name="Manufacture" ColumnName="Manufacture" />
+          <ScalarProperty Name="Image" ColumnName="Image" />
+          <ScalarProperty Name="Specs" ColumnName="Specs" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="GID" ColumnName="GID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="motherboards">
+      <EntityTypeMapping TypeName="db_managment_labModel.motherboard">
+        <MappingFragment StoreEntitySet="motherboard">
+          <ScalarProperty Name="Manufacture" ColumnName="Manufacture" />
+          <ScalarProperty Name="Image" ColumnName="Image" />
+          <ScalarProperty Name="Specs" ColumnName="Specs" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="GID" ColumnName="GID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="opticals">
+      <EntityTypeMapping TypeName="db_managment_labModel.optical">
+        <MappingFragment StoreEntitySet="optical">
+          <ScalarProperty Name="Manufacture" ColumnName="Manufacture" />
+          <ScalarProperty Name="Image" ColumnName="Image" />
+          <ScalarProperty Name="Specs" ColumnName="Specs" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="GID" ColumnName="GID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="pc_case">
+      <EntityTypeMapping TypeName="db_managment_labModel.pc_case">
+        <MappingFragment StoreEntitySet="pc_case">
+          <ScalarProperty Name="Manufacture" ColumnName="Manufacture" />
+          <ScalarProperty Name="Image" ColumnName="Image" />
+          <ScalarProperty Name="Specs" ColumnName="Specs" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="GID" ColumnName="GID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="processors">
+      <EntityTypeMapping TypeName="db_managment_labModel.processor">
+        <MappingFragment StoreEntitySet="processor">
+          <ScalarProperty Name="Manufacture" ColumnName="Manufacture" />
+          <ScalarProperty Name="Image" ColumnName="Image" />
+          <ScalarProperty Name="Specs" ColumnName="Specs" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="GID" ColumnName="GID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="psus">
+      <EntityTypeMapping TypeName="db_managment_labModel.psu">
+        <MappingFragment StoreEntitySet="psu">
+          <ScalarProperty Name="Manufacture" ColumnName="Manufacture" />
+          <ScalarProperty Name="Image" ColumnName="Image" />
+          <ScalarProperty Name="Specs" ColumnName="Specs" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="GID" ColumnName="GID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="rams">
+      <EntityTypeMapping TypeName="db_managment_labModel.ram">
+        <MappingFragment StoreEntitySet="ram">
+          <ScalarProperty Name="Manufacture" ColumnName="Manufacture" />
+          <ScalarProperty Name="Image" ColumnName="Image" />
+          <ScalarProperty Name="Specs" ColumnName="Specs" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="GID" ColumnName="GID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Pclabs">
+      <EntityTypeMapping TypeName="db_managment_labModel.Pclab">
+        <MappingFragment StoreEntitySet="Pclab">
+          <ScalarProperty Name="coolerID" ColumnName="coolerID" />
+          <ScalarProperty Name="opticalID" ColumnName="opticalID" />
+          <ScalarProperty Name="caseID" ColumnName="caseID" />
+          <ScalarProperty Name="gpuID" ColumnName="gpuID" />
+          <ScalarProperty Name="psuID" ColumnName="psuID" />
+          <ScalarProperty Name="hard_diskID" ColumnName="hard_diskID" />
+          <ScalarProperty Name="cpuID" ColumnName="cpuID" />
+          <ScalarProperty Name="ramID" ColumnName="ramID" />
+          <ScalarProperty Name="motherboardID" ColumnName="motherboardID" />
+          <ScalarProperty Name="NamePc" ColumnName="NamePc" />
+          <ScalarProperty Name="GID" ColumnName="GID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

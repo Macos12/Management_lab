@@ -1,0 +1,277 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="db_managment_labModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="CategoryCooler">
+    <Key>
+      <PropertyRef Name="cat_cooler_id" />
+    </Key>
+    <Property Name="cat_cooler_id" Type="Int32" Nullable="false" />
+    <Property Name="cat_cooler_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="coolers" Relationship="db_managment_labModel.CategoryCoolercooler" FromRole="CategoryCooler" ToRole="cooler" />
+  </EntityType>
+  <EntityType Name="cooler">
+    <Key>
+      <PropertyRef Name="GID" />
+    </Key>
+    <Property Name="GID" Type="Guid" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Specs" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Image" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Manufacture" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="CategoryCooler" Relationship="db_managment_labModel.CategoryCoolercooler" FromRole="cooler" ToRole="CategoryCooler" />
+    <Property Name="cat_cooler_id" Type="Int32" Nullable="true" />
+    <NavigationProperty Name="Pclabs" Relationship="db_managment_labModel.Pclabcooler" FromRole="cooler" ToRole="Pclab" />
+  </EntityType>
+  <EntityContainer Name="db_managment_labEntities2" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="CategoryCoolers" EntityType="Self.CategoryCooler" />
+    <EntitySet Name="coolers" EntityType="Self.cooler" />
+    <AssociationSet Name="CategoryCoolercooler" Association="db_managment_labModel.CategoryCoolercooler">
+      <End Role="CategoryCooler" EntitySet="CategoryCoolers" />
+      <End Role="cooler" EntitySet="coolers" />
+    </AssociationSet>
+    <EntitySet Name="announcements" EntityType="db_managment_labModel.announcement" />
+    <EntitySet Name="CategoryHardDisks" EntityType="db_managment_labModel.CategoryHardDisk" />
+    <EntitySet Name="gpus" EntityType="db_managment_labModel.gpu" />
+    <EntitySet Name="hard_disk" EntityType="db_managment_labModel.hard_disk" />
+    <EntitySet Name="motherboards" EntityType="db_managment_labModel.motherboard" />
+    <EntitySet Name="opticals" EntityType="db_managment_labModel.optical" />
+    <EntitySet Name="pc_case" EntityType="db_managment_labModel.pc_case" />
+    <EntitySet Name="processors" EntityType="db_managment_labModel.processor" />
+    <EntitySet Name="psus" EntityType="db_managment_labModel.psu" />
+    <EntitySet Name="rams" EntityType="db_managment_labModel.ram" />
+    <AssociationSet Name="CategoryHardDiskhard_disk" Association="db_managment_labModel.CategoryHardDiskhard_disk">
+      <End Role="CategoryHardDisk" EntitySet="CategoryHardDisks" />
+      <End Role="hard_disk" EntitySet="hard_disk" />
+    </AssociationSet>
+    <EntitySet Name="Pclabs" EntityType="db_managment_labModel.Pclab" />
+    <AssociationSet Name="Pclabcooler" Association="db_managment_labModel.Pclabcooler">
+      <End Role="Pclab" EntitySet="Pclabs" />
+      <End Role="cooler" EntitySet="coolers" />
+    </AssociationSet>
+    <AssociationSet Name="hard_diskPclab" Association="db_managment_labModel.hard_diskPclab">
+      <End Role="Pclab" EntitySet="Pclabs" />
+      <End Role="hard_disk" EntitySet="hard_disk" />
+    </AssociationSet>
+    <AssociationSet Name="Pclabgpu" Association="db_managment_labModel.Pclabgpu">
+      <End Role="Pclab" EntitySet="Pclabs" />
+      <End Role="gpu" EntitySet="gpus" />
+    </AssociationSet>
+    <AssociationSet Name="Pclabpc_case" Association="db_managment_labModel.Pclabpc_case">
+      <End Role="Pclab" EntitySet="Pclabs" />
+      <End Role="pc_case" EntitySet="pc_case" />
+    </AssociationSet>
+    <AssociationSet Name="psuPclab" Association="db_managment_labModel.psuPclab">
+      <End Role="Pclab" EntitySet="Pclabs" />
+      <End Role="psu" EntitySet="psus" />
+    </AssociationSet>
+    <AssociationSet Name="Pclabmotherboard" Association="db_managment_labModel.Pclabmotherboard">
+      <End Role="Pclab" EntitySet="Pclabs" />
+      <End Role="motherboard" EntitySet="motherboards" />
+    </AssociationSet>
+    <AssociationSet Name="processorPclab" Association="db_managment_labModel.processorPclab">
+      <End Role="Pclab" EntitySet="Pclabs" />
+      <End Role="processor" EntitySet="processors" />
+    </AssociationSet>
+    <AssociationSet Name="opticalPclab" Association="db_managment_labModel.opticalPclab">
+      <End Role="Pclab" EntitySet="Pclabs" />
+      <End Role="optical" EntitySet="opticals" />
+    </AssociationSet>
+    <AssociationSet Name="ramPclab" Association="db_managment_labModel.ramPclab">
+      <End Role="Pclab" EntitySet="Pclabs" />
+      <End Role="ram" EntitySet="rams" />
+    </AssociationSet>
+  </EntityContainer>
+  <Association Name="CategoryCoolercooler">
+    <End Type="db_managment_labModel.CategoryCooler" Role="CategoryCooler" Multiplicity="0..1" />
+    <End Type="db_managment_labModel.cooler" Role="cooler" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CategoryCooler">
+        <PropertyRef Name="cat_cooler_id" />
+      </Principal>
+      <Dependent Role="cooler">
+        <PropertyRef Name="cat_cooler_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="announcement">
+    <Key>
+      <PropertyRef Name="GID" />
+    </Key>
+    <Property Name="GID" Type="Guid" Nullable="false" />
+    <Property Name="Title" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="body_text" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="username" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="date" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
+  <EntityType Name="CategoryHardDisk">
+    <Key>
+      <PropertyRef Name="cat_hard_disk_id" />
+    </Key>
+    <Property Name="cat_hard_disk_id" Type="Int32" Nullable="false" />
+    <Property Name="cat_hard_disk_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="hard_disks" Relationship="db_managment_labModel.CategoryHardDiskhard_disk" FromRole="CategoryHardDisk" ToRole="hard_disk" />
+  </EntityType>
+  <EntityType Name="gpu">
+    <Key>
+      <PropertyRef Name="GID" />
+    </Key>
+    <Property Name="GID" Type="Guid" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Specs" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Image" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Manufacture" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Pclabs" Relationship="db_managment_labModel.Pclabgpu" FromRole="gpu" ToRole="Pclab" />
+  </EntityType>
+  <EntityType Name="hard_disk">
+    <Key>
+      <PropertyRef Name="GID" />
+    </Key>
+    <Property Name="GID" Type="Guid" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Specs" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Image" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Manufacture" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="CategoryHardDisk" Relationship="db_managment_labModel.CategoryHardDiskhard_disk" FromRole="hard_disk" ToRole="CategoryHardDisk" />
+    <Property Name="cat_hard_disk_id" Type="Int32" Nullable="true" />
+    <NavigationProperty Name="Pclabs" Relationship="db_managment_labModel.hard_diskPclab" FromRole="hard_disk" ToRole="Pclab" />
+  </EntityType>
+  <EntityType Name="motherboard">
+    <Key>
+      <PropertyRef Name="GID" />
+    </Key>
+    <Property Name="GID" Type="Guid" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Specs" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Image" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Manufacture" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Pclabs" Relationship="db_managment_labModel.Pclabmotherboard" FromRole="motherboard" ToRole="Pclab" />
+  </EntityType>
+  <EntityType Name="optical">
+    <Key>
+      <PropertyRef Name="GID" />
+    </Key>
+    <Property Name="GID" Type="Guid" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Specs" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Image" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Manufacture" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Pclabs" Relationship="db_managment_labModel.opticalPclab" FromRole="optical" ToRole="Pclab" />
+  </EntityType>
+  <EntityType Name="pc_case">
+    <Key>
+      <PropertyRef Name="GID" />
+    </Key>
+    <Property Name="GID" Type="Guid" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Specs" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Image" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Manufacture" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Pclabs" Relationship="db_managment_labModel.Pclabpc_case" FromRole="pc_case" ToRole="Pclab" />
+  </EntityType>
+  <EntityType Name="processor">
+    <Key>
+      <PropertyRef Name="GID" />
+    </Key>
+    <Property Name="GID" Type="Guid" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Specs" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Image" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Manufacture" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Pclabs" Relationship="db_managment_labModel.processorPclab" FromRole="processor" ToRole="Pclab" />
+  </EntityType>
+  <EntityType Name="psu">
+    <Key>
+      <PropertyRef Name="GID" />
+    </Key>
+    <Property Name="GID" Type="Guid" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Specs" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Image" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Manufacture" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Pclabs" Relationship="db_managment_labModel.psuPclab" FromRole="psu" ToRole="Pclab" />
+  </EntityType>
+  <EntityType Name="ram">
+    <Key>
+      <PropertyRef Name="GID" />
+    </Key>
+    <Property Name="GID" Type="Guid" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Specs" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Image" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Manufacture" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Pclabs" Relationship="db_managment_labModel.ramPclab" FromRole="ram" ToRole="Pclab" />
+  </EntityType>
+  <Association Name="CategoryHardDiskhard_disk">
+    <End Type="db_managment_labModel.CategoryHardDisk" Role="CategoryHardDisk" Multiplicity="0..1" />
+    <End Type="db_managment_labModel.hard_disk" Role="hard_disk" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CategoryHardDisk">
+        <PropertyRef Name="cat_hard_disk_id" />
+      </Principal>
+      <Dependent Role="hard_disk">
+        <PropertyRef Name="cat_hard_disk_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Pclab">
+    <Key>
+      <PropertyRef Name="GID" />
+    </Key>
+    <Property Name="GID" Type="Guid" Nullable="false" />
+    <Property Name="NamePc" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="motherboardID" Type="Guid" Nullable="false" />
+    <Property Name="ramID" Type="Guid" Nullable="false" />
+    <Property Name="cpuID" Type="Guid" Nullable="false" />
+    <Property Name="hard_diskID" Type="Guid" Nullable="false" />
+    <Property Name="psuID" Type="Guid" Nullable="false" />
+    <Property Name="gpuID" Type="Guid" Nullable="false" />
+    <Property Name="caseID" Type="Guid" Nullable="false" />
+    <Property Name="opticalID" Type="Guid" />
+    <Property Name="coolerID" Type="Guid" />
+    <NavigationProperty Name="NavigationProperty1" />
+    <NavigationProperty Name="cooler" Relationship="db_managment_labModel.Pclabcooler" FromRole="Pclab" ToRole="cooler" />
+    <NavigationProperty Name="hard_disk" Relationship="db_managment_labModel.hard_diskPclab" FromRole="Pclab" ToRole="hard_disk" />
+    <NavigationProperty Name="gpu" Relationship="db_managment_labModel.Pclabgpu" FromRole="Pclab" ToRole="gpu" />
+    <NavigationProperty Name="pc_case" Relationship="db_managment_labModel.Pclabpc_case" FromRole="Pclab" ToRole="pc_case" />
+    <NavigationProperty Name="psu" Relationship="db_managment_labModel.psuPclab" FromRole="Pclab" ToRole="psu" />
+    <NavigationProperty Name="motherboard" Relationship="db_managment_labModel.Pclabmotherboard" FromRole="Pclab" ToRole="motherboard" />
+    <NavigationProperty Name="processor" Relationship="db_managment_labModel.processorPclab" FromRole="Pclab" ToRole="processor" />
+    <NavigationProperty Name="optical" Relationship="db_managment_labModel.opticalPclab" FromRole="Pclab" ToRole="optical" />
+    <NavigationProperty Name="ram" Relationship="db_managment_labModel.ramPclab" FromRole="Pclab" ToRole="ram" />
+  </EntityType>
+  <Association Name="Pclabcooler">
+    <End Type="db_managment_labModel.Pclab" Role="Pclab" Multiplicity="*" />
+    <End Type="db_managment_labModel.cooler" Role="cooler" Multiplicity="0..1" />
+  </Association>
+  <Association Name="hard_diskPclab">
+    <End Type="db_managment_labModel.Pclab" Role="Pclab" Multiplicity="*" />
+    <End Type="db_managment_labModel.hard_disk" Role="hard_disk" Multiplicity="0..1" />
+  </Association>
+  <Association Name="Pclabgpu">
+    <End Type="db_managment_labModel.Pclab" Role="Pclab" Multiplicity="*" />
+    <End Type="db_managment_labModel.gpu" Role="gpu" Multiplicity="0..1" />
+  </Association>
+  <Association Name="Pclabpc_case">
+    <End Type="db_managment_labModel.Pclab" Role="Pclab" Multiplicity="*" />
+    <End Type="db_managment_labModel.pc_case" Role="pc_case" Multiplicity="0..1" />
+  </Association>
+  <Association Name="psuPclab">
+    <End Type="db_managment_labModel.Pclab" Role="Pclab" Multiplicity="*" />
+    <End Type="db_managment_labModel.psu" Role="psu" Multiplicity="0..1" />
+  </Association>
+  <Association Name="Pclabmotherboard">
+    <End Type="db_managment_labModel.Pclab" Role="Pclab" Multiplicity="*" />
+    <End Type="db_managment_labModel.motherboard" Role="motherboard" Multiplicity="0..1" />
+  </Association>
+  <Association Name="processorPclab">
+    <End Type="db_managment_labModel.Pclab" Role="Pclab" Multiplicity="*" />
+    <End Type="db_managment_labModel.processor" Role="processor" Multiplicity="0..1" />
+  </Association>
+  <Association Name="opticalPclab">
+    <End Type="db_managment_labModel.Pclab" Role="Pclab" Multiplicity="*" />
+    <End Type="db_managment_labModel.optical" Role="optical" Multiplicity="0..1" />
+  </Association>
+  <Association Name="ramPclab">
+    <End Type="db_managment_labModel.Pclab" Role="Pclab" Multiplicity="*" />
+    <End Type="db_managment_labModel.ram" Role="ram" Multiplicity="0..1" />
+  </Association>
+</Schema>

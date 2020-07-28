@@ -1,0 +1,852 @@
+﻿@model ML.Models.Pclab
+@using Microsoft.AspNet.Identity;
+@using ML.Extensions;
+@using Microsoft.AspNet.Identity;
+@using Microsoft.AspNet.Identity.Owin;
+
+
+@{ Layout = null;}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no" name="viewport">
+    <title>Create a new Lab Pc</title>
+    <link rel="stylesheet" href="~/Content/dist/modules/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/Content/dist/modules/ionicons/css/ionicons.min.css">
+    <link rel="stylesheet" href="~/Content/dist/modules/fontawesome/web-fonts-with-css/css/fontawesome-all.min.css">
+    <link rel="stylesheet" href="~/Content/dist/modules/summernote/summernote-lite.css">
+    <link rel="stylesheet" href="~/Content/dist/modules/flag-icon-css/css/flag-icon.min.css">
+    <link rel="stylesheet" href="~/Content/dist/css/demo.css">
+    <link rel="stylesheet" href="~/Content/dist/css/style.css">
+    <link rel="stylesheet" href="~/Content/dist/modules/toastr/build/toastr.min.css">
+    <style>
+    
+    .modal-dialog{
+    overflow-y: initial !important
+    }
+    .modal-body{
+    height: 250px;
+    overflow-y: auto;
+    }
+</style>
+</head>
+<body>
+
+    <div id="app">
+        <div class="main-wrapper">
+            <div class="navbar-bg"></div>
+            <nav class="navbar navbar-expand-lg main-navbar">
+                <form class="form-inline mr-auto">
+                    <ul class="navbar-nav mr-3">
+                        <li><a href="#" data-toggle="sidebar" class="nav-link nav-link-lg"><i class="ion ion-navicon-round"></i></a></li>
+
+                    </ul>
+
+
+                    <div class="search-element">
+                        <a href="@Url.Action("Index", "Home")" class="nav-link nav-link-lg">
+                            <i class="ion ion-android-person d-lg-none"></i>
+                            <div class="d-sm-none d-lg-inline-block">Home</div>
+                        </a>
+
+                    </div>
+                    <div class="search-element">
+                        <a href="@Url.Action("Index", "lab")" class="nav-link nav-link-lg">
+                            <i class="ion ion-android-person d-lg-none"></i>
+                            <div class="d-sm-none d-lg-inline-block">Lab</div>
+                        </a>
+
+                    </div>
+                    <div class="search-element">
+                        <a href="@Url.Action("Index", "problem")" class="nav-link nav-link-lg">
+                            <i class="ion ion-android-person d-lg-none"></i>
+                            <div class="d-sm-none d-lg-inline-block">Pc Problems</div>
+                        </a>
+
+                    </div>
+                </form>
+                @Html.Partial("_LoginPartial")
+            </nav>
+            <!--left side bar-->
+            @if (User.IsInRole("Admin"))
+            {
+                <div class="main-sidebar">
+                    <aside id="sidebar-wrapper">
+                        <div class="sidebar-brand">
+                            <a href="@Url.Action("Index", "Home")">Management</a>
+                        </div>
+
+                        <div class="sidebar-user">
+                            <div class="sidebar-user-details text-center">
+                                <div class="user-name">@User.Identity.Getusern()</div>
+                                <div class="user-role">
+                                    @ViewBag.currentrole
+                                </div>
+                            </div>
+                        </div>
+                        <ul class="sidebar-menu">
+                            <li class="menu-header">Dashboard</li>
+                            <li>
+                                <a href="@Url.Action("In","lab")"><i class="ion ion-speedometer"></i><span>Dashboard</span></a>
+                            </li>
+                            <li class="menu-header">Pc Parts</li>
+                            <li>
+                                <a href="#" class="has-dropdown"><i class="ion ion-ios-albums-outline"></i><span>Pc Parts Primary</span></a>
+                                <ul class="menu-dropdown">
+                                    <li>
+                                        <a href="#" class="has-dropdown"><i class="ion ion-ios-circle-outline"></i> Pc cases</a>
+                                        <ul class="menu-dropdown">
+                                            <li><a href="@Url.Action("Create", "pc_case")"><i class="ion ion-ios-circle-outline"></i> Add a Pc case</a></li>
+                                            <li><a href="@Url.Action("Index", "pc_case")"><i class="ion ion-ios-circle-outline"></i> Modify a Pc case</a></li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="has-dropdown"><i class="ion ion-ios-circle-outline"></i> Power Supply</a>
+                                        <ul class="menu-dropdown">
+                                            <li><a href="@Url.Action("Create", "psu")"><i class="ion ion-ios-circle-outline"></i> Add a Power Supply</a></li>
+                                            <li><a href="@Url.Action("Index", "psu")"><i class="ion ion-ios-circle-outline"></i> Modify a Power Supply</a></li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="has-dropdown"><i class="ion ion-ios-circle-outline"></i> Motherboard</a>
+                                        <ul class="menu-dropdown">
+                                            <li><a href="@Url.Action("Create", "motherboard")"><i class="ion ion-ios-circle-outline"></i> Add a Motherboard</a></li>
+                                            <li><a href="@Url.Action("Index", "motherboard")"><i class="ion ion-ios-circle-outline"></i> Modify a Motherboard</a></li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="has-dropdown"><i class="ion ion-ios-circle-outline"></i> Processor</a>
+                                        <ul class="menu-dropdown">
+                                            <li><a href="@Url.Action("Create", "processor")"><i class="ion ion-ios-circle-outline"></i> Add a Processor</a></li>
+                                            <li><a href="@Url.Action("Index", "processor")"><i class="ion ion-ios-circle-outline"></i> Modify a Processor</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="#" class="has-dropdown"><i class="ion ion-ios-albums-outline"></i><span>Pc Parts Secondary</span></a>
+                                <ul class="menu-dropdown">
+                                    <li>
+                                        <a href="#" class="has-dropdown"><i class="ion ion-ios-circle-outline"></i> Graphical Card</a>
+                                        <ul class="menu-dropdown">
+                                            <li><a href="@Url.Action("Create", "gpu")"><i class="ion ion-ios-circle-outline"></i> Add a Graphical Card</a></li>
+                                            <li><a href="@Url.Action("Index", "gpu")"><i class="ion ion-ios-circle-outline"></i> Modify a Graphical Card</a></li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="has-dropdown"><i class="ion ion-ios-circle-outline"></i> Hard disk</a>
+                                        <ul class="menu-dropdown">
+                                            <li><a href="@Url.Action("Create", "hard_disk")"><i class="ion ion-ios-circle-outline"></i> Add a Hard disk</a></li>
+                                            <li><a href="@Url.Action("Index", "hard_disk")"><i class="ion ion-ios-circle-outline"></i> Modify a hard disk</a></li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="has-dropdown"><i class="ion ion-ios-circle-outline"></i> Optical</a>
+                                        <ul class="menu-dropdown">
+                                            <li><a href="@Url.Action("Create", "optical")"><i class="ion ion-ios-circle-outline"></i> Add a Optical</a></li>
+                                            <li><a href="@Url.Action("Index", "optical")"><i class="ion ion-ios-circle-outline"></i> Modify an Optical</a></li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="has-dropdown"><i class="ion ion-ios-circle-outline"></i> Ram</a>
+                                        <ul class="menu-dropdown">
+                                            <li><a href="@Url.Action("Create", "rams")"><i class="ion ion-ios-circle-outline"></i> Add a Ram</a></li>
+                                            <li><a href="@Url.Action("Index", "rams")"><i class="ion ion-ios-circle-outline"></i> Modify a Ram</a></li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="has-dropdown"><i class="ion ion-ios-circle-outline"></i> Cooler</a>
+                                        <ul class="menu-dropdown">
+                                            <li><a href="@Url.Action("Create", "coolers")"><i class="ion ion-ios-circle-outline"></i> Add a Cooler</a></li>
+                                            <li><a href="@Url.Action("Index", "coolers")"><i class="ion ion-ios-circle-outline"></i> Modify a Cooler</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="active">
+                                <a href="@Url.Action("Create", "lab")"><i class="ion ion-plus-round"></i><span>Create a new Lab Pc</span></a>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("Create", "Home")"><i class="ion ion-document-text"></i><span>Create a new Post</span></a>
+                            </li>
+                            <li class="menu-header">Manage Users</li>
+                            <li>
+                                <a href="@Url.Action("Index", "Roles")"><i class="ion ion-person"></i><span>Users and Roles</span></a>
+                            </li>
+                            <li class="menu-header">Refer a Pc Problem</li>
+                            <li>
+                                <a href="@Url.Action("Create", "problem")"><i class="ion ion-document-text"></i><span>Create</span></a>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("Index", "problem")"><i class="ion ion-wrench"></i><span>Manage</span></a>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("Index", "Cascade")"><i class="ion ion-information"></i><span>Usefull Information</span></a>
+                            </li>
+                        </ul>
+                    </aside>
+                </div>
+            }
+            else if (User.IsInRole("User"))
+            {
+                <div class="main-sidebar">
+                    <aside id="sidebar-wrapper">
+                        <div class="sidebar-brand">
+                            <a href="@Url.Action("Index", "Home")">Management</a>
+                        </div>
+
+                        <div class="sidebar-user">
+                            <div class="sidebar-user-details text-center">
+                                <div class="user-name">@User.Identity.Getusern()</div>
+                                <div class="user-role">
+                                    @ViewBag.currentrole
+                                </div>
+                            </div>
+                        </div>
+                        <ul class="sidebar-menu">
+                            <li class="menu-header">Refer a Pc Problem</li>
+                            <li class="active">
+                                <a href="@Url.Action("Create", "problem")"><i class="ion ion-document-text"></i><span>Create</span></a>
+                            </li>
+
+                        </ul>
+                    </aside>
+                </div>
+            }
+            else
+            {
+                <div class="main-sidebar">
+                    <aside id="sidebar-wrapper">
+                        <div class="sidebar-brand">
+                            <a href="@Url.Action("Index", "Home")">Management</a>
+                        </div>
+
+                        <div class="sidebar-user">
+                            <div class="sidebar-user-details text-center">
+                                <div class="user-name">Welcome to the Management</div>
+                                <div class="user-role">
+                                    Laboratory
+                                </div>
+                            </div>
+                        </div>
+                        <ul class="sidebar-menu">
+                            <li class="menu-header">Don't have an Account?</li>
+                            <li>
+                                <a href="@Url.Action("Register", "Account")"><i class="ion ion-plus-round"></i><span>Create one</span></a>
+                            </li>
+                            <li class="menu-header">Log in now</li>
+                            <li>
+                                <a href="@Url.Action("Login", "Account")"><i class="ion ion-log-in"></i><span>Sign in</span></a>
+                            </li>
+                        </ul>
+                    </aside>
+                </div>
+            }
+
+            <!--Total admin Total Users-->
+            <div class="main-content">
+                <section class="section">
+
+                    <div class="row">
+                        <div class="col-lg-12 col-md-6 col-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4>Create a new Lab Pc</h4>
+                                </div>
+                                <div class="card-body">
+                                    @using (Html.BeginForm("Create", "lab", FormMethod.Post))
+                                    {
+                                        @Html.AntiForgeryToken()
+
+                                    <div class="form-horizontal">
+                                        @*@Html.ValidationSummary(true, "", new { @class = "text-danger" })*@
+
+                                        <!--PcName-->
+                                        <div class="form-group">
+                                            <div class="control-label col-md-2">Pc Name</div>
+                                            <div class="col-md-10">
+                                                @Html.EditorFor(model => model.NamePc, new { htmlAttributes = new { @class = "form-control" } })
+                                                @Html.HiddenFor(model => model.temp)
+                                                @Html.ValidationMessageFor(model => model.NamePc, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="control-label col-md-2">Laboratory room</div>
+                                            <div class="col-md-10">
+                                                @Html.DropDownList("lab_id", null, "Select which one laboratory room", htmlAttributes: new { @class = "form-control" })
+                                                @Html.ValidationMessageFor(model => model.lab_id, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                        <!--PcName-->
+                                        <!--CaseId-->
+                                        <div class="form-group">
+                                            <div class="control-label col-md-2">Cases</div>
+                                            <div class="col-md-10">
+                                                <input type="text" class="form-control c1" id="result1" readonly value="@Model.cs"><br>
+                                                @Html.HiddenFor(m => m.caseID)
+                                                @Html.HiddenFor(m => m.cs)
+                                                @Html.ValidationMessageFor(m => m.caseID, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                        <!--CaseId-->
+                                        <!--motherboardId-->
+                                        <div class="form-group">
+                                            <div class="control-label col-md-2">Motherboard</div>
+                                            <div class="col-md-10">
+                                                <input type="text" class="form-control c2" id="result2" readonly value="@Model.mother"><br>
+                                                @Html.HiddenFor(m => m.motherboardID)
+                                                @Html.HiddenFor(m => m.mother)
+                                                @Html.ValidationMessageFor(m => m.motherboardID, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                        <!--motherboardId-->
+                                        <!--psuId-->
+                                        <div class="form-group">
+                                            <div class="control-label col-md-2">Psu</div>
+                                            <div class="col-md-10">
+                                                <input type="text" class="form-control c3" id="result3" readonly value="@Model.ps"><br>
+                                                @Html.HiddenFor(m => m.psuID)
+                                                @Html.HiddenFor(m => m.ps)
+                                                @Html.ValidationMessageFor(m => m.psuID, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                        <!--psuId-->
+                                        <!--cpuId-->
+                                        <div class="form-group">
+                                            <div class="control-label col-md-2">Cpu</div>
+                                            <div class="col-md-10">
+                                                <input type="text" class="form-control c4" id="result4" readonly value="@Model.cp"><br>
+                                                @Html.HiddenFor(m => m.cpuID)
+                                                @Html.HiddenFor(m => m.cp)
+                                                @Html.ValidationMessageFor(m => m.cpuID, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                        <!--cpuId-->
+                                        <!--ramId-->
+                                        <div class="form-group">
+                                            <div class="control-label col-md-2">Ram</div>
+                                            <div class="col-md-10">
+                                                <input type="text" class="form-control c5" id="result5" readonly value="@Model.rm"><br>
+                                                @Html.HiddenFor(m => m.ramID)
+                                                @Html.HiddenFor(m => m.rm)
+                                                @Html.ValidationMessageFor(m => m.ramID, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                        <!--ramId-->
+                                        <!--hard_diskId-->
+                                        <div class="form-group">
+                                            <div class="control-label col-md-2">Hard Disk</div>
+                                            <div class="col-md-10">
+                                                <input type="text" class="form-control c6" id="result6" readonly value="@Model.hdd"><br>
+                                                @Html.HiddenFor(m => m.hard_diskID)
+                                                @Html.HiddenFor(m => m.hdd)
+                                                @Html.ValidationMessageFor(m => m.hard_diskID, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                        <!--hard_diskId-->
+                                        <!--gpuId-->
+                                        <div class="form-group">
+                                            <div class="control-label col-md-2">Gpu</div>
+                                            <div class="col-md-10">
+                                                <input type="text" class="form-control c7" id="result7" readonly value="@Model.gp"><br>
+                                                @Html.HiddenFor(m => m.gpuID)
+                                                @Html.HiddenFor(m => m.gp)
+                                                @Html.ValidationMessageFor(m => m.gpuID, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                        <!--gpuId-->
+                                        <!--opticalId-->
+                                        <div class="form-group">
+                                            <div class="control-label col-md-2">Optical</div>
+                                            <div class="col-md-10">
+                                                <input type="text" class="form-control c8" id="result8" readonly value="@Model.opt"><br>
+                                                @Html.HiddenFor(m => m.opticalID)
+                                                @Html.HiddenFor(m => m.opt)
+                                                @Html.ValidationMessageFor(m => m.opticalID, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                        <!--opticalId-->
+                                        <!--coolerId-->
+                                        <div class="form-group">
+                                            <div class="control-label col-md-2">Cooler</div>
+                                            <div class="col-md-10">
+                                                <input type="text" class="form-control c9" id="result9" readonly value="@Model.cool"><br>
+                                                @Html.HiddenFor(m => m.coolerID)
+                                                @Html.HiddenFor(m => m.cool)
+                                                @Html.ValidationMessageFor(m => m.coolerID, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                        <!--coolerId-->
+                                        <!--koympi-->
+                                        <div class="form-group">
+                                            <div class="col-md-offset-2 col-md-10">
+                                                <input type="submit" value="Create" class="btn btn-dark" />
+                                                <a href="@Url.Action("Index", "lab")"
+                                                   class="btn btn-secondary ">
+                                                    <i class="glyphicon glyphicon-share-alt"></i>
+                                                    &nbsp;Back to List
+                                                </a>
+                                            </div>
+
+                                        </div>
+                                        <!--koympi-->
+                                    </div>
+                                    }
+                                </div>
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+
+                </section>
+            </div>
+            <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal-dialog" role="document" style="overflow-y: scroll; max-height:100%;  margin-top: 50px; margin-bottom:50px;">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">Pc Cases</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-group">
+                                @foreach (var item in Model.pc_cases)
+                                {
+                                    if (Model.caseID == item.GID)
+                                    {
+                                        <input type="radio" name="optradio1" value="@item.Name" data-name="@item.GID" checked="checked"><img src="@item.Image" width="50" height="50" /> @item.Name<br />
+                                    }
+                                    else
+                                    {
+                                        <input type="radio" name="optradio1" value="@item.Name" data-name="@item.GID"><img src="@item.Image" width="50" height="50" /> @item.Name<br />
+                                    }
+                                }
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" id="buttonCloseID1" data-dismiss="modal">OK</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal-dialog" role="document" style="overflow-y: scroll; max-height:100%;  margin-top: 50px; margin-bottom:50px;">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">Motherboards</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-group">
+                                @foreach (var item in Model.motherboards)
+                                {
+                                    if (Model.motherboardID == item.GID)
+                                    {
+                                        <input type="radio" name="optradio2" value="@item.Name" data-name="@item.GID" checked="checked"><img src="@item.Image" width="50" height="50" /> @item.Name<br />
+                                    }
+                                    else
+                                    {
+                                        <input type="radio" name="optradio2" value="@item.Name" data-name="@item.GID"><img src="@item.Image" width="50" height="50" /> @item.Name<br />
+                                    }
+                                }
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" id="buttonCloseID2" data-dismiss="modal">OK</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal-dialog" role="document" style="overflow-y: scroll; max-height:100%;  margin-top: 50px; margin-bottom:50px;">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">Power Supplies</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-group">
+                                @foreach (var item in Model.psus)
+                                {
+                                    if (Model.psuID == item.GID)
+                                    {
+                                        <input type="radio" name="optradio3" value="@item.Name" data-name="@item.GID" checked="checked"><img src="@item.Image" width="50" height="50" /> @item.Name<br />
+                                    }
+                                    else
+                                    {
+                                        <input type="radio" name="optradio3" value="@item.Name" data-name="@item.GID"><img src="@item.Image" width="50" height="50" /> @item.Name<br />
+                                    }
+                                }
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" id="buttonCloseID3" data-dismiss="modal">OK</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal fade" id="myModal4" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal-dialog" role="document" style="overflow-y: scroll; max-height:100%;  margin-top: 50px; margin-bottom:50px;">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">Processors</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-group">
+                                @foreach (var item in Model.processors)
+                                {
+                                    if (Model.cpuID == item.GID)
+                                    {
+                                        <input type="radio" name="optradio4" value="@item.Name" data-name="@item.GID" checked="checked"><img src="@item.Image" width="50" height="50" /> @item.Name<br />
+                                    }
+                                    else
+                                    {
+                                        <input type="radio" name="optradio4" value="@item.Name" data-name="@item.GID"><img src="@item.Image" width="50" height="50" /> @item.Name<br />
+                                    }
+                                }
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" id="buttonCloseID4" data-dismiss="modal">OK</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal fade" id="myModal5" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal-dialog" role="document" style="overflow-y: scroll; max-height:100%;  margin-top: 50px; margin-bottom:50px;">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">Rams</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-group">
+                                @foreach (var item in Model.rams)
+                                {
+                                    if (Model.ramID == item.GID)
+                                    {
+                                        <input type="radio" name="optradio5" value="@item.Name" data-name="@item.GID" checked="checked"><img src="@item.Image" width="50" height="50" /> @item.Name<br />
+                                    }
+                                    else
+                                    {
+                                        <input type="radio" name="optradio5" value="@item.Name" data-name="@item.GID"><img src="@item.Image" width="50" height="50" /> @item.Name<br />
+                                    }
+                                }
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" id="buttonCloseID5" data-dismiss="modal">OK</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal fade" id="myModal6" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal-dialog" role="document" style="overflow-y: scroll; max-height:100%;  margin-top: 50px; margin-bottom:50px;">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">Hard Disks</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-group">
+                                @foreach (var item in Model.hard_disks)
+                                {
+                                    if (Model.hard_diskID == item.GID)
+                                    {
+                                        <input type="radio" name="optradio6" value="@item.Name" data-name="@item.GID" checked="checked"><img src="@item.Image" width="50" height="50" /> @item.Name<br />
+                                    }
+                                    else
+                                    {
+                                        <input type="radio" name="optradio6" value="@item.Name" data-name="@item.GID"><img src="@item.Image" width="50" height="50" /> @item.Name<br />
+                                    }
+                                }
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" id="buttonCloseID6" data-dismiss="modal">OK</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal fade" id="myModal7" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal-dialog" role="document" style="overflow-y: scroll; max-height:100%;  margin-top: 50px; margin-bottom:50px;">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">Graphical Cards</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-group">
+                                @foreach (var item in Model.gpus)
+                                {
+                                    if (Model.gpuID == item.GID)
+                                    {
+                                        <input type="radio" name="optradio7" value="@item.Name" data-name="@item.GID" checked="checked"><img src="@item.Image" width="50" height="50" /> @item.Name<br />
+                                    }
+                                    else
+                                    {
+                                        <input type="radio" name="optradio7" value="@item.Name" data-name="@item.GID"><img src="@item.Image" width="50" height="50" /> @item.Name<br />
+                                    }
+                                }
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" id="buttonCloseID7" data-dismiss="modal">OK</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal fade" id="myModal8" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal-dialog" role="document" style="overflow-y: scroll; max-height:100%;  margin-top: 50px; margin-bottom:50px;">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">Opticals</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-group">
+                                @foreach (var item in Model.opticals)
+                                {
+                                    if (Model.opticalID == item.GID)
+                                    {
+                                        <input type="radio" name="optradio8" value="@item.Name" data-name="@item.GID" checked="checked"><img src="@item.Image" width="50" height="50" /> @item.Name<br />
+                                    }
+                                    else
+                                    {
+                                        <input type="radio" name="optradio8" value="@item.Name" data-name="@item.GID"><img src="@item.Image" width="50" height="50" /> @item.Name<br />
+                                    }
+                                }
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" id="buttonCloseID8" data-dismiss="modal">OK</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal fade" id="myModal9" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal-dialog" role="document" style="overflow-y: scroll; max-height:100%;  margin-top: 50px; margin-bottom:50px;">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">Coolers</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-group">
+                                @foreach (var item in Model.coolers)
+                                {
+                                    if (Model.coolerID == item.GID)
+                                    {
+                                        <input type="radio" name="optradio9" value="@item.Name" data-name="@item.GID" checked="checked"><img src="@item.Image" width="50" height="50" /> @item.Name<br />
+                                    }
+                                    else
+                                    {
+                                        <input type="radio" name="optradio9" value="@item.Name" data-name="@item.GID"><img src="@item.Image" width="50" height="50" /> @item.Name<br />
+                                    }
+                                }
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" id="buttonCloseID9" data-dismiss="modal">OK</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <footer class="main-footer">
+                <div class="footer-left">
+                    &copy; Copyright @DateTime.Now.Year
+                </div>
+                <div class="footer-right"></div>
+            </footer>
+        </div>
+    </div>
+
+    <script src="~/Content/dist/modules/jquery.min.js"></script>
+    <script src="~/Content/dist/modules/popper.js"></script>
+    <script src="~/Content/dist/modules/tooltip.js"></script>
+    <script src="~/Content/dist/modules/bootstrap/js/bootstrap.min.js"></script>
+    <script src="~/Content/dist/modules/nicescroll/jquery.nicescroll.min.js"></script>
+    <script src="~/Content/dist/modules/scroll-up-bar/dist/scroll-up-bar.min.js"></script>
+    <script src="~/Content/dist/js/sa-functions.js"></script>
+
+    <script src="~/Content/dist/modules/chart.min.js"></script>
+    <script src="~/Content/dist/modules/summernote/summernote-lite.js"></script>
+
+    <script src="~/Content/dist/modules/toastr/build/toastr.min.js"></script>
+    <script src="~/Content/dist/js/scripts.js"></script>
+    <script src="~/Content/dist/js/custom.js"></script>
+
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            $('.c1').click(function () {
+                $('#myModal1').modal({
+                    backdrop: 'static'
+                });
+            });
+            $('#buttonCloseID1').click(function () {
+                var databack1 = $('input[name="optradio1"]:checked').val().trim(); ///to value
+                var i1 = $("input[name='optradio1']:checked").data('name'); //to text
+                $('#result1').val(databack1);
+                $('#cs').val(databack1);
+                $('#caseID').val(i1);
+                $('#myModal1').modal('hide');
+            });
+            $('.close').click(function () {
+                $('#myModal1').modal('hide');
+            });
+
+            $('.c2').click(function () {
+                $('#myModal2').modal({
+                    backdrop: 'static'
+                });
+            });
+            $('#buttonCloseID2').click(function () {
+                var databack2 = $('input[name="optradio2"]:checked').val().trim(); ///to value
+                var i2 = $("input[name='optradio2']:checked").data('name'); //to text
+                $('#result2').val(databack2);
+                $('#mother').val(databack2);
+                $('#motherboardID').val(i2);
+                $('#myModal2').modal('hide');
+            });
+            $('.close').click(function () {
+                $('#myModal2').modal('hide');
+            });
+            $('.c3').click(function () {
+                $('#myModal3').modal({
+                    backdrop: 'static'
+                });
+            });
+            $('#buttonCloseID3').click(function () {
+                var databack3 = $('input[name="optradio3"]:checked').val().trim(); ///to value
+                var i3 = $("input[name='optradio3']:checked").data('name'); //to text
+                $('#result3').val(databack3);
+                $('#ps').val(databack3);
+                $('#psuID').val(i3);
+                $('#myModal3').modal('hide');
+            });
+            $('.close').click(function () {
+                $('#myModal3').modal('hide');
+            });
+            $('.c4').click(function () {
+                $('#myModal4').modal({
+                    backdrop: 'static'
+                });
+            });
+            $('#buttonCloseID4').click(function () {
+                var databack4 = $('input[name="optradio4"]:checked').val().trim(); ///to value
+                var i4 = $("input[name='optradio4']:checked").data('name'); //to text
+                $('#result4').val(databack4);
+                $('#cp').val(databack4);
+                $('#cpuID').val(i4);
+                $('#myModal4').modal('hide');
+            });
+            $('.close').click(function () {
+                $('#myModal4').modal('hide');
+            });
+            $('.c5').click(function () {
+                $('#myModal5').modal({
+                    backdrop: 'static'
+                });
+            });
+            $('#buttonCloseID5').click(function () {
+                var databack5 = $('input[name="optradio5"]:checked').val().trim(); ///to value
+                var i5 = $("input[name='optradio5']:checked").data('name'); //to text
+                $('#result5').val(databack5);
+                $('#rm').val(databack5);
+                $('#ramID').val(i5);
+                $('#myModal5').modal('hide');
+            });
+            $('.close').click(function () {
+                $('#myModal5').modal('hide');
+            });
+            $('.c6').click(function () {
+                $('#myModal6').modal({
+                    backdrop: 'static'
+                });
+            });
+            $('#buttonCloseID6').click(function () {
+                var databack6 = $('input[name="optradio6"]:checked').val().trim(); ///to value
+                var i6 = $("input[name='optradio6']:checked").data('name'); //to text
+                $('#result6').val(databack6);
+                $('#hdd').val(databack6);
+                $('#hard_diskID').val(i6);
+                $('#myModal6').modal('hide');
+            });
+            $('.close').click(function () {
+                $('#myModal6').modal('hide');
+            });
+            $('.c7').click(function () {
+                $('#myModal7').modal({
+                    backdrop: 'static'
+                });
+            });
+            $('#buttonCloseID7').click(function () {
+                var databack7 = $('input[name="optradio7"]:checked').val().trim(); ///to value
+                var i7 = $("input[name='optradio7']:checked").data('name'); //to text
+                $('#result7').val(databack7);
+                $('#gp').val(databack7);
+                $('#gpuID').val(i7);
+                $('#myModal7').modal('hide');
+            });
+            $('.close').click(function () {
+                $('#myModal7').modal('hide');
+            });
+            $('.c8').click(function () {
+                $('#myModal8').modal({
+                    backdrop: 'static'
+                });
+            });
+            $('#buttonCloseID8').click(function () {
+                var databack8 = $('input[name="optradio8"]:checked').val().trim(); ///to value
+                var i8 = $("input[name='optradio8']:checked").data('name'); //to text
+                $('#result8').val(databack8);
+                $('#opt').val(databack8);
+                $('#opticalID').val(i8);
+                $('#myModal8').modal('hide');
+            });
+            $('.close').click(function () {
+                $('#myModal8').modal('hide');
+            });
+            $('.c9').click(function () {
+                $('#myModal9').modal({
+                    backdrop: 'static'
+                });
+            });
+            $('#buttonCloseID9').click(function () {
+                var databack9 = $('input[name="optradio9"]:checked').val().trim(); ///to value
+                var i9 = $("input[name='optradio9']:checked").data('name'); //to text
+                $('#result9').val(databack9);
+                $('#cool').val(databack9);
+                $('#coolerID').val(i9);
+                $('#myModal9').modal('hide');
+            });
+            $('.close').click(function () {
+                $('#myModal9').modal('hide');
+            });
+
+        });
+
+    </script>
+</body>
+</html>
+
+
+
+
+

@@ -1,0 +1,106 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="db_managment_labModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="cooler$">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="255" />
+    <Property Name="Specs" Type="nvarchar" MaxLength="255" />
+    <Property Name="Image" Type="nvarchar" MaxLength="255" />
+    <Property Name="Manufacture" Type="nvarchar" MaxLength="255" />
+    <Property Name="Category" Type="nvarchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="gpu$">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="255" />
+    <Property Name="Specs" Type="nvarchar" MaxLength="255" />
+    <Property Name="Image" Type="nvarchar" MaxLength="255" />
+    <Property Name="Manufacture" Type="nvarchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="hard_disk$">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="255" />
+    <Property Name="Specs" Type="nvarchar" MaxLength="255" />
+    <Property Name="Image" Type="nvarchar" MaxLength="255" />
+    <Property Name="Manufacture" Type="nvarchar" MaxLength="255" />
+    <Property Name="Category" Type="nvarchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="motherboard$">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="255" />
+    <Property Name="Specs" Type="nvarchar" MaxLength="255" />
+    <Property Name="Image" Type="nvarchar" MaxLength="255" />
+    <Property Name="Manufacture" Type="nvarchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="optical$">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="255" />
+    <Property Name="Specs" Type="nvarchar" MaxLength="255" />
+    <Property Name="Image" Type="nvarchar" MaxLength="255" />
+    <Property Name="Manufacture" Type="nvarchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="pc_case$">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="255" />
+    <Property Name="Specs" Type="nvarchar" MaxLength="255" />
+    <Property Name="Image" Type="nvarchar" MaxLength="255" />
+    <Property Name="Manufacture" Type="nvarchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="processor$">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="255" />
+    <Property Name="Specs" Type="nvarchar" MaxLength="255" />
+    <Property Name="Image" Type="nvarchar" MaxLength="255" />
+    <Property Name="Manufacture" Type="nvarchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="ram$">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="255" />
+    <Property Name="Specs" Type="nvarchar" MaxLength="255" />
+    <Property Name="Image" Type="nvarchar" MaxLength="255" />
+    <Property Name="Manufacture" Type="nvarchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="trofo$">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="255" />
+    <Property Name="Specs" Type="nvarchar" MaxLength="255" />
+    <Property Name="Image" Type="nvarchar" MaxLength="255" />
+    <Property Name="Manufacture" Type="nvarchar" MaxLength="255" />
+  </EntityType>
+  <EntityContainer Name="db_managment_labModelStoreContainer">
+    <EntitySet Name="cooler$" EntityType="Self.cooler$" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="gpu$" EntityType="Self.gpu$" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="hard_disk$" EntityType="Self.hard_disk$" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="motherboard$" EntityType="Self.motherboard$" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="optical$" EntityType="Self.optical$" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="pc_case$" EntityType="Self.pc_case$" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="processor$" EntityType="Self.processor$" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ram$" EntityType="Self.ram$" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="trofo$" EntityType="Self.trofo$" Schema="dbo" store:Type="Tables" />
+  </EntityContainer>
+</Schema>

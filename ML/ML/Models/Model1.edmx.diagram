@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="ac10403013004f8bb0b05a8e82e82847" Name="Diagram1" ZoomLevel="64">
+        <EntityTypeShape EntityType="db_managment_labModel.CategoryCooler" Width="1.5" PointX="5.25" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="db_managment_labModel.CategoryHardDisk" Width="1.5" PointX="11" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="db_managment_labModel.cooler" Width="1.5" PointX="5.25" PointY="2.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="db_managment_labModel.gpu" Width="1.5" PointX="9.25" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="db_managment_labModel.hard_disk" Width="1.5" PointX="11.125" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="db_managment_labModel.motherboard" Width="1.5" PointX="7.125" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="db_managment_labModel.optical" Width="1.5" PointX="5.25" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="db_managment_labModel.pc_case" Width="1.5" PointX="7.125" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="db_managment_labModel.processor" Width="1.5" PointX="10.5" PointY="9.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="db_managment_labModel.psu" Width="1.5" PointX="11.125" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="db_managment_labModel.ram" Width="1.5" PointX="7.125" PointY="0.625" IsExpanded="true" />
+        <AssociationConnector Association="db_managment_labModel.coolerCategoryCooler" />
+        <AssociationConnector Association="db_managment_labModel.hard_diskCategoryHardDisk" />
+        <EntityTypeShape EntityType="db_managment_labModel.Pclab" Width="1.5" PointX="9" PointY="3.625" />
+        <AssociationConnector Association="db_managment_labModel.Pclabcooler" />
+        <AssociationConnector Association="db_managment_labModel.Pclabmotherboard" />
+        <AssociationConnector Association="db_managment_labModel.Pclabram" />
+        <AssociationConnector Association="db_managment_labModel.Pclabhard_disk" />
+        <AssociationConnector Association="db_managment_labModel.Pclabgpu" />
+        <AssociationConnector Association="db_managment_labModel.Pclaboptical" />
+        <AssociationConnector Association="db_managment_labModel.Pclabpc_case" />
+        <AssociationConnector Association="db_managment_labModel.Pclabprocessor" />
+        <AssociationConnector Association="db_managment_labModel.Pclabpsu" />
+        <EntityTypeShape EntityType="db_managment_labModel.announcement" Width="1.5" PointX="1.375" PointY="0.75" />
+        <EntityTypeShape EntityType="db_managment_labModel.CategoryProblem" Width="1.5" PointX="1.25" PointY="5.5" />
+        <EntityTypeShape EntityType="db_managment_labModel.PcProblem" Width="1.5" PointX="3.125" PointY="6.125" />
+        <AssociationConnector Association="db_managment_labModel.CategoryProblemPcProblem" />
+        <AssociationConnector Association="db_managment_labModel.PcProblemPclab" />
+        <EntityTypeShape EntityType="db_managment_labModel.lab" Width="1.5" PointX="4.125" PointY="9.875" />
+        <AssociationConnector Association="db_managment_labModel.labPclab" />
+        <AssociationConnector Association="db_managment_labModel.Pclablab" />
+        <AssociationConnector Association="db_managment_labModel.PcProblemlab" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

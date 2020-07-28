@@ -1,0 +1,106 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="db_managment_labModelStoreContainer" CdmEntityContainer="db_managment_labEntities">
+    <EntitySetMapping Name="cooler_">
+      <EntityTypeMapping TypeName="db_managment_labModel.cooler_">
+        <MappingFragment StoreEntitySet="cooler$">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Specs" ColumnName="Specs" />
+          <ScalarProperty Name="Image" ColumnName="Image" />
+          <ScalarProperty Name="Manufacture" ColumnName="Manufacture" />
+          <ScalarProperty Name="Category" ColumnName="Category" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="gpu_">
+      <EntityTypeMapping TypeName="db_managment_labModel.gpu_">
+        <MappingFragment StoreEntitySet="gpu$">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Specs" ColumnName="Specs" />
+          <ScalarProperty Name="Image" ColumnName="Image" />
+          <ScalarProperty Name="Manufacture" ColumnName="Manufacture" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="hard_disk_">
+      <EntityTypeMapping TypeName="db_managment_labModel.hard_disk_">
+        <MappingFragment StoreEntitySet="hard_disk$">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Specs" ColumnName="Specs" />
+          <ScalarProperty Name="Image" ColumnName="Image" />
+          <ScalarProperty Name="Manufacture" ColumnName="Manufacture" />
+          <ScalarProperty Name="Category" ColumnName="Category" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="motherboard_">
+      <EntityTypeMapping TypeName="db_managment_labModel.motherboard_">
+        <MappingFragment StoreEntitySet="motherboard$">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Specs" ColumnName="Specs" />
+          <ScalarProperty Name="Image" ColumnName="Image" />
+          <ScalarProperty Name="Manufacture" ColumnName="Manufacture" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="optical_">
+      <EntityTypeMapping TypeName="db_managment_labModel.optical_">
+        <MappingFragment StoreEntitySet="optical$">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Specs" ColumnName="Specs" />
+          <ScalarProperty Name="Image" ColumnName="Image" />
+          <ScalarProperty Name="Manufacture" ColumnName="Manufacture" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="pc_case_">
+      <EntityTypeMapping TypeName="db_managment_labModel.pc_case_">
+        <MappingFragment StoreEntitySet="pc_case$">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Specs" ColumnName="Specs" />
+          <ScalarProperty Name="Image" ColumnName="Image" />
+          <ScalarProperty Name="Manufacture" ColumnName="Manufacture" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="processor_">
+      <EntityTypeMapping TypeName="db_managment_labModel.processor_">
+        <MappingFragment StoreEntitySet="processor$">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Specs" ColumnName="Specs" />
+          <ScalarProperty Name="Image" ColumnName="Image" />
+          <ScalarProperty Name="Manufacture" ColumnName="Manufacture" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ram_">
+      <EntityTypeMapping TypeName="db_managment_labModel.ram_">
+        <MappingFragment StoreEntitySet="ram$">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Specs" ColumnName="Specs" />
+          <ScalarProperty Name="Image" ColumnName="Image" />
+          <ScalarProperty Name="Manufacture" ColumnName="Manufacture" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="trofo_">
+      <EntityTypeMapping TypeName="db_managment_labModel.trofo_">
+        <MappingFragment StoreEntitySet="trofo$">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Specs" ColumnName="Specs" />
+          <ScalarProperty Name="Image" ColumnName="Image" />
+          <ScalarProperty Name="Manufacture" ColumnName="Manufacture" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

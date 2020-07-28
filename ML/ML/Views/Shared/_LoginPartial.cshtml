@@ -1,0 +1,65 @@
+﻿@using Microsoft.AspNet.Identity;
+@using ML.Extensions;
+@if (Request.IsAuthenticated)
+{
+    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+    {
+    @Html.AntiForgeryToken()
+
+    <ul class="nav navbar-nav navbar-right">
+        @*<li>
+            @Html.ActionLink("Hello " + User.Identity.Getusern() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+        </li>
+        <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>*@
+        <li class="dropdown">
+            <a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg">
+                <i class="ion ion-android-person d-lg-none"></i>
+                <div class="d-sm-none d-lg-inline-block">Hi, @User.Identity.Getusern()</div>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right">
+                <a href="@Url.Action("ManageProfile","Account")" class="dropdown-item has-icon">
+                    <i class="ion ion-android-person"></i> Profile
+                </a>
+                <a href="#" class="dropdown-item has-icon" onclick="javascript: document.getElementById('logoutForm').submit()">
+                    <i class="ion ion-log-out"></i> Logout
+                </a>
+            </div>
+        </li>
+        
+    </ul>
+    }
+}
+else
+{
+    <ul class="nav navbar-nav navbar-right">
+        <li class="nav-item">
+            <a href="@Url.Action("Register","Account")" class="nav-link nav-link-lg">
+                <i class="ion ion-android-person d-lg-none"></i>
+                <div class="d-sm-none d-lg-inline-block">Register</div>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="@Url.Action("Login","Account")" class="nav-link nav-link-lg">
+                <i class="ion ion-android-person d-lg-none"></i>
+                <div class="d-sm-none d-lg-inline-block">Log in</div>
+            </a>
+        </li>
+        @*<li class="nav-item">@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+        <li class="nav-item">@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>*@
+    </ul>
+    
+                @*<li class="dropdown">
+            <a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg">
+                <i class="ion ion-android-person d-lg-none"></i>
+                <div class="d-sm-none d-lg-inline-block"> @Html.ActionLink("Hi " + User.Identity.Getusern(), "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })</div>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right">
+                <a href="profile.html" class="dropdown-item has-icon">
+                    <i class="ion ion-android-person"></i> Profile
+                </a>
+                <a href="javascript:document.getElementById('logoutForm').submit()">Log off</a>
+            </div>
+        </li>*@
+    
+    
+}
